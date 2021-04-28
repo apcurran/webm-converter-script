@@ -1,0 +1,32 @@
+#! /usr/bin/bash
+
+read -p "Would you like to convert an entire folder of videos to webm, or just one file? (folder/file) " selection
+
+# Begin defined functions
+convertFolder() {
+    for video in *; do
+        echo "converting $video"
+
+        ffmpeg -i "$video" -c:v libvpx-vp9 -crf 33 -b:v 0 -pass 1 -an -f null /dev/null && \
+        ffmpeg -i "$video" -c:v libvpx-vp9 -crf 33 -b:v 0 -pass 2 -an "${video%.*}.webm"
+    done
+}
+
+convertFile() {
+    # $1 is the current file to convert
+    echo "converting $1"
+
+    ffmpeg -i "$1" -c:v libvpx-vp9 -crf 33 -b:v 0 -pass 1 -an -f null /dev/null && \
+    ffmpeg -i "$1" -c:v libvpx-vp9 -crf 33 -b:v 0 -pass 2 -an "${1%.*}.webm"
+}
+# End defined functions
+
+if [[ "$selection" == "folder" ]]; then
+    # Loop through all files in folder to convert.
+    convertFolder
+else
+    # Just convert the file passed in.
+    read -p "What is the name of the file, in this directory, that you want to convert? " file
+
+    convertFile "$file"
+fi
