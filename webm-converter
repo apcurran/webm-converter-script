@@ -4,7 +4,7 @@ read -p "Would you like to convert an entire folder of videos to webm, or just o
 # All lowercased user input string
 FORMATTED_SELECTION=${selection,,}
 
-# Begin defined functions
+### Begin defined functions ###
 convertFolder() {
     for video in *; do
         echo "converting $video"
@@ -21,18 +21,16 @@ convertFile() {
     ffmpeg -i "$1" -c:v libvpx-vp9 -crf 33 -b:v 0 -pass 1 -an -f null /dev/null && \
     ffmpeg -i "$1" -c:v libvpx-vp9 -crf 33 -b:v 0 -pass 2 -an "${1%.*}.webm"
 }
-# End defined functions
+### End defined functions ###
 
 if [[ "$FORMATTED_SELECTION" == "folder" ]]; then
     # Loop through all files in folder to convert.
-    # convertFolder
-    echo $FORMATTED_SELECTION
+    convertFolder
 elif [[ "$FORMATTED_SELECTION" == "file" ]]; then
     # Just convert the file passed in.
-    # read -p "What is the name of the file, in this directory, that you want to convert? " file
+    read -p "What is the name of the file, in this directory, that you want to convert? " file
 
-    # convertFile "$file"
-    echo $FORMATTED_SELECTION
+    convertFile "$file"
 else
     echo "Unknown command"
 fi
