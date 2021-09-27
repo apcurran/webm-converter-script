@@ -1,6 +1,7 @@
 #! /usr/bin/bash
 
 read -p "Would you like to convert an entire folder of videos to webm, or just one file? (folder/file) " selection
+# All lowercased user input string
 FORMATTED_SELECTION=${selection,,}
 
 # Begin defined functions
