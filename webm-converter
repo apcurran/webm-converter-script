@@ -23,13 +23,14 @@ convertFile() {
 }
 # End defined functions
 
-if [[ "$selection" == "folder" ]]; then
+if [[ "$FORMATTED_SELECTION" == "folder" ]]; then
     # Loop through all files in folder to convert.
     convertFolder
-
-else
+elif [[ "$FORMATTED_SELECTION" == "file" ]]
     # Just convert the file passed in.
     read -p "What is the name of the file, in this directory, that you want to convert? " file
 
     convertFile "$file"
+else
+    echo "Unknown command"
 fi
