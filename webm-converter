@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 read -p "Would you like to convert an entire folder of videos to webm, or just one file? (folder/file) " selection
 
