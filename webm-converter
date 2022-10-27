@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-read -p "Would you like to convert an entire folder of videos to webm, or just one file? (folder/file) " selection
+read -rp "Would you like to convert an entire folder of videos to webm, or just one file? (folder/file) " selection
 
 convertFolder() {
     for video in *; do
@@ -27,7 +27,7 @@ if [ "$FORMATTED_SELECTION" = "folder" ]; then
     convertFolder
 elif [ "$FORMATTED_SELECTION" = "file" ]; then
     # Just convert the file passed in.
-    read -p "What is the name of the file, in this directory, that you want to convert? " file
+    read -rp "What is the name of the file, in this directory, that you want to convert? " file
 
     convertFile "$file"
 else
